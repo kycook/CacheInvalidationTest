@@ -1,7 +1,7 @@
 CacheInvalidationTester
 =======================
 
-1. Run the server with Node.js ('bash node server.js')
+1. Run the server with Node.js (`bash node server.js`)
 2. Navigate to http://127.0.0.1:1337
 3. Click the "Make POST request" button multiple times
 
