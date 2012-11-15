@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test Page</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            var previousResponse = null;
+
+            $(document).ready(function() {
+                $("#postRequestBtn").on("click", function(event) {
+                    event.preventDefault();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/request",
+                        success: onCallback
+                    });
+                });
+            });
+
+            function onCallback(response) {
+                var stringifiedResponse = JSON.stringify(response);
+                $("#responseContainer").text(stringifiedResponse);
+
+                if(previousResponse === stringifiedResponse) {
+                    $("#errorMsg").css("display", "block");
+                }
+
+                previousResponse = stringifiedResponse;
+            }
+        </script>
+
+        <style type="text/css">
+            #errorMsg {
+                color: #ff0000;
+                font-weight: bold;
+                display: none;
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="button" value="Make POST request" id="postRequestBtn"/>
+        <br/><br/>
+        <div>
+            <strong>Response:</strong>
+            <div id="responseContainer"></div>
+        </div>
+
+        <div id="errorMsg">The server cached the POST response!</div>
+    </body>
+</html>
